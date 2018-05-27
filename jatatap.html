@@ -169,7 +169,7 @@
       src: ['sounds/bubbles.mp3']
     })
 
-    circleArray = [];
+    polygonArray = [];
     function onKeyDown(event) {
 
       // Find Max Point
@@ -180,29 +180,29 @@
       var point = randPoint * maxPoint;
 
       var numSides = Math.floor(Math.random()*7 + 3)
-      var newCircle = new Path.RegularPolygon(point, numSides, 110);
+      var newPoly = new Path.RegularPolygon(point, numSides, 110);
 
       if (keyData[event.key]) {
-        newCircle.fillColor = keyData[event.key].color;
+        newPoly.fillColor = keyData[event.key].color;
         keyData[event.key].sound.play();
       }
       else {
-        newCircle.fillColor = "orange"
+        newPoly.fillColor = "orange"
         defaultSound.play();
       }
 
-      circleArray.push(newCircle)
+      polygonArray.push(newPoly)
     }
 
     function onFrame (event){
-      for (var i = 0; i < circleArray.length; i++) {
-        circleArray[i].fillColor.hue += 1;
-        circleArray[i].scale(0.9);
-        if (circleArray[i].area < 1) {
-          circleArray[i].remove(); // removes from canvas
-          circleArray.splice(i, 1); //removes from array
+      for (var i = 0; i < polygonArray.length; i++) {
+        polygonArray[i].fillColor.hue += 1;
+        polygonArray[i].scale(0.9);
+        if (polygonArray[i].area < 1) {
+          polygonArray[i].remove(); // removes from canvas
+          polygonArray.splice(i, 1); //removes from array
           i--; // so no indexes are skipped
-          console.log(circleArray)
+          console.log(polygonArray)
         }
       } 
     }
