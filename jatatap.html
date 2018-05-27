@@ -179,7 +179,7 @@
       // Actual Point
       var point = randPoint * maxPoint;
 
-      var numSides = Math.floor(Math.random()*7 + 3)
+      var numSides = Math.floor(Math.random()*7 + 5)
       var newPoly = new Path.RegularPolygon(point, numSides, 110);
 
       if (keyData[event.key]) {
@@ -196,15 +196,45 @@
 
     function onFrame (event){
       for (var i = 0; i < polygonArray.length; i++) {
+        // Decrease size
         polygonArray[i].fillColor.hue += 1;
         polygonArray[i].scale(0.9);
+        
+        // This will cause the objects to fy everywhere but that may be cool
+        var movement = Math.floor(Math.random()*4 + 1)
+        // console.log(movement)
+        if (movement === 1) {
+          moveLeft(polygonArray[i])
+        } else if (movement === 2) {
+          moveRight(polygonArray[i])
+        } else if (movement === 3) {
+          moveDown(polygonArray[i])
+        } else {
+          moveUp(polygonArray[i])
+        }
+
         if (polygonArray[i].area < 1) {
           polygonArray[i].remove(); // removes from canvas
           polygonArray.splice(i, 1); //removes from array
           i--; // so no indexes are skipped
           console.log(polygonArray)
         }
-      } 
+      }
+      function moveLeft(polygon) {
+        polygon.position.x += 5;
+      }
+
+      function moveRight(polygon) {
+        polygon.position.x -= 5;
+      }
+
+      function moveDown(polygon) {
+        polygon.position.y -= 5;
+      }
+
+      function moveUp(polygon) {
+        polygon.position.y += 5;
+      }
     }
 
   </script>
