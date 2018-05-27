@@ -170,6 +170,8 @@
     })
 
     polygonArray = [];
+    // kind of a bad solution but quick for now
+    directions = [];
     function onKeyDown(event) {
 
       // Find Max Point
@@ -192,6 +194,8 @@
       }
 
       polygonArray.push(newPoly)
+      var movement = Math.floor(Math.random()*4 + 1)
+      directions.push(movement)
     }
 
     function onFrame (event){
@@ -199,10 +203,8 @@
         // Decrease size
         polygonArray[i].fillColor.hue += 1;
         polygonArray[i].scale(0.9);
-        
-        // This will cause the objects to fy everywhere but that may be cool
-        var movement = Math.floor(Math.random()*4 + 1)
-        // console.log(movement)
+        movement = directions[i]
+
         if (movement === 1) {
           moveLeft(polygonArray[i])
         } else if (movement === 2) {
@@ -216,10 +218,12 @@
         if (polygonArray[i].area < 1) {
           polygonArray[i].remove(); // removes from canvas
           polygonArray.splice(i, 1); //removes from array
+          directions.splice(i, 1)
           i--; // so no indexes are skipped
-          console.log(polygonArray)
+          // console.log(polygonArray)
         }
       }
+
       function moveLeft(polygon) {
         polygon.position.x += 5;
       }
