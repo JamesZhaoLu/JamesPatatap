@@ -179,7 +179,8 @@
       // Actual Point
       var point = randPoint * maxPoint;
 
-      var newCircle = new Path.Circle(point, 110);
+      var numSides = Math.floor(Math.random()*7 + 3)
+      var newCircle = new Path.RegularPolygon(point, numSides, 110);
 
       if (keyData[event.key]) {
         newCircle.fillColor = keyData[event.key].color;
