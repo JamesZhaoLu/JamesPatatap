@@ -169,10 +169,17 @@
       src: ['sounds/bubbles.mp3']
     })
 
+    animationArray = []; // Think about how to store/rotate between animations
     polygonArray = [];
-    // kind of a bad solution but quick for now
+    // kind of a bad solution but quick for now - a better impomentaion is using a array of Objects (therefore eveythin removed)
     directions = [];
+
     function onKeyDown(event) {
+
+      // We should randomize this stuff if it's a space
+      if (event.modifiers.space) {
+        // Change animation set
+      }
 
       // Find Max Point
       var maxPoint = new Point(view.size.width, view.size.height);
@@ -182,7 +189,7 @@
       var point = randPoint * maxPoint;
 
       var numSides = Math.floor(Math.random()*7 + 5)
-      var newPoly = new Path.RegularPolygon(point, numSides, 110);
+      var newPoly = new Path.RegularPolygon(point, numSides, 200);
 
       if (keyData[event.key]) {
         newPoly.fillColor = keyData[event.key].color;
